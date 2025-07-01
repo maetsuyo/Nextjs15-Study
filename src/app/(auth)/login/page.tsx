@@ -2,12 +2,6 @@
 
 import { useState } from "react";
 
-type UserProps = {
-  id: number;
-  username: string;
-  password: string;
-}
-
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -17,16 +11,17 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:4000/users");
-      const users: UserProps[] = await res.json();
-      const user: UserProps | undefined = users.find((u:UserProps) => u.username === username && u.password === password);
+      const res = await fetch("/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      });
 
-      if (user) {
-        setMessage("ログイン成功");
-      } else {
-        setMessage("ログイン失敗");
-      }
-    } catch (e) {
+      const data = await res.json();
+      setMessage(data.message);
+    } catch(e) {
       console.error(e);
       setMessage("エラー");
     }
