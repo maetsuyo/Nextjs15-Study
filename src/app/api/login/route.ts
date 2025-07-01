@@ -1,10 +1,13 @@
 import { NextResponse } from "next/server";
-import { UserProps } from "@/app/type/user";
-
-const DB_URL = process.env.DB_URL
+import { DB_URL } from "@/app/lib/config";
+import { UserProps } from "@/app/types/user";
 
 export async function POST(req: Request) {
   const { username, password } = await req.json();
+
+  if (!username || !password) {
+    return NextResponse.json({ message: "ユーザー名とパスワードは必須です。" }, { status: 500 });
+  }
 
   if (!DB_URL) {
     console.error("エンドポイントエラー");
@@ -15,7 +18,9 @@ export async function POST(req: Request) {
     const res = await fetch(DB_URL);
     const users: UserProps[] = await res.json();
     const user: UserProps | undefined = users.find((u:UserProps) => u.username === username && u.password === password);
-    return user ? NextResponse.json({ message: "ログイン成功" }) : NextResponse.json({ message: "ログイン失敗" });
+    return user
+      ? NextResponse.json({ message: "ログインしました。" })
+      : NextResponse.json({ message: "ユーザー名またはパスワードが間違っています。" });
   } catch (e) {
     console.error(e);
     return NextResponse.json({ message: "エラー" }, { status: 500 });
