@@ -1,16 +1,24 @@
 {
   "users": [
     {
+      "id": "9edb",
       "username": "user01",
       "password": "pass01"
     },
     {
+      "id": "7754",
       "username": "user02",
       "password": "pass02"
     },
     {
+      "id": "bb30",
       "username": "user03",
       "password": "pass03"
+    },
+    {
+      "id": "1d29",
+      "username": "user04",
+      "password": "pass04"
     }
   ]
 }

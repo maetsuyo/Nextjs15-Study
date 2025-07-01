@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react";
+import AuthFormComponent from "../components/AuthForm";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -27,34 +28,14 @@ export default function Login() {
     }
   }
   return (
-    <div>
-      <div>
-      <h1>ログイン</h1>
-      <form onSubmit={handleLogin}>
-        <p>ユーザー名</p>
-        <input
-          type="text"
-          name="username"
-          placeholder="username"
-          required
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        <p>パスワード</p>
-        <input
-          type="password"
-          name="password"
-          placeholder="password"
-          required
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">
-          ログイン
-        </button>
-      </form>
-      </div>
-      {message && (
-        <p>{message}</p>
-      )}
-    </div>
+    <AuthFormComponent
+      title="ログイン"
+      message={message}
+      username={username}
+      password={password}
+      onChangeUsername={(e) => setUsername(e.target.value)}
+      onChangePassword={(e) => setPassword(e.target.value)}
+      onSubmit={handleLogin}
+    />
   );
 }
