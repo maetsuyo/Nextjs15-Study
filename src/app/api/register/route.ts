@@ -6,7 +6,7 @@ export async function POST(req: Request) {
   const { username, password } = await req.json();
 
   if (!username || !password) {
-    return NextResponse.json({ message: "ユーザー名とパスワードは必須です。" }, { status: 500 });
+    return NextResponse.json({ message: "ユーザー名とパスワードは必須です。" }, { status: 400 });
   }
 
   if (!DB_URL) {
@@ -38,8 +38,8 @@ export async function POST(req: Request) {
     return regiRes.ok
       ? NextResponse.json({ message: "新規登録しました。"})
       : NextResponse.json({ message: "エラー"}, { status: 500});
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     return NextResponse.json({ message: "エラー" }, { status: 500 });
   }
 }

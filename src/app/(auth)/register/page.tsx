@@ -22,8 +22,8 @@ export default function Register() {
 
       const data = await res.json();
       setMessage(data.message);
-    } catch(e) {
-      console.error(e);
+    } catch(err) {
+      console.error(err);
       setMessage("エラー");
     }
   }
@@ -33,8 +33,8 @@ export default function Register() {
       message={message}
       username={username}
       password={password}
-      onChangeUsername={(e) => setUsername(e.target.value)}
-      onChangePassword={(e) => setPassword(e.target.value)}
+      onChangeUsername={(err) => setUsername(e.target.value)}
+      onChangePassword={(err) => setPassword(e.target.value)}
       onSubmit={handleRegister}
     />
   );
