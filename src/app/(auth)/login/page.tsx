@@ -1,32 +1,18 @@
-"use client"
+"use client";
 
-import { useState } from "react";
 import AuthFormComponent from "../components/AuthForm";
+import { useLogin } from "@/app/hooks/useLogin";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await fetch("/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ username, password })
-      });
-
-      const data = await res.json();
-      setMessage(data.message);
-    } catch(err) {
-      console.error(err);
-      setMessage("エラー");
-    }
-  }
+  const {
+    username,
+    setUsername,
+    password,
+    setPassword,
+    message,
+    handleLogin
+  } = useLogin();
+  
   return (
     <AuthFormComponent
       title="ログイン"

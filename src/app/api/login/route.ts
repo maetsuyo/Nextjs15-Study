@@ -12,8 +12,7 @@ export async function POST(req: Request) {
   }
 
   if (!DB_URL) {
-    console.error("エンドポイントエラー");
-    return NextResponse.json({ message: "エラー" }, { status: 500 });
+    throw new Error("エンドポイントエラー");
   }
 
   try {
@@ -34,8 +33,7 @@ export async function POST(req: Request) {
       maxAge: 60*60,
       path: "/"
     });
-
-    return NextResponse.json({ message: "ログインしました" });
+    return NextResponse.json({}, { status: 200 });
 
   } catch (err) {
     console.error(err);
