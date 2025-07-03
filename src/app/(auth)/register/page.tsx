@@ -22,8 +22,8 @@ export default function Register() {
 
       const data = await res.json();
       setMessage(data.message);
-    } catch(e) {
-      console.error(e);
+    } catch(err) {
+      console.error(err);
       setMessage("エラー");
     }
   }
