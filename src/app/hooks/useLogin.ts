@@ -24,7 +24,7 @@ export function useLogin() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push("/dashboard");
+        router.push("/profile");
       } else {
         setMessage(data.message);
       }

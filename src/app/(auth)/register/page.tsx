@@ -33,8 +33,8 @@ export default function Register() {
       message={message}
       username={username}
       password={password}
-      onChangeUsername={(err) => setUsername(e.target.value)}
-      onChangePassword={(err) => setPassword(e.target.value)}
+      onChangeUsername={(e) => setUsername(e.target.value)}
+      onChangePassword={(e) => setPassword(e.target.value)}
       onSubmit={handleRegister}
     />
   );
